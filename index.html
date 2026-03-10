@@ -1,60 +1,234 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Menu + Recherche</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-    }
-    nav {
-      background-color: #333;
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .menu a {
-      color: white;
-      text-decoration: none;
-      margin-right: 15px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - FinanceInfo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
 
-    .menu a:hover {
-      text-decoration: underline;
-    }
+        nav {
+          background-color: #333;
+          padding: 10px 20px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .menu a {
+          color: white;
+          text-decoration: none;
+          margin-right: 15px;
+        }
 
-    .search-bar input {
-      padding: 6px;
-      border: none;
-      border-radius: 4px;
-    }
+        .menu a:hover {
+          text-decoration: underline;
+        }
 
-    .search-bar button {
-      padding: 6px 10px;
-      border: none;
-      border-radius: 4px;
-      margin-left: 5px;
-      cursor: pointer;
-    }
-  </style>
+        .search-bar input {
+          padding: 6px;
+          border: none;
+          border-radius: 4px;
+        }
+
+        .search-bar button {
+          padding: 6px 10px;
+          border: none;
+          border-radius: 4px;
+          margin-left: 5px;
+          cursor: pointer;
+        }
+          /* FinanceInfo Core Styles */
+        :root {
+            --primary-blue: #0056D2; /* Matching the Login Button */
+            --primary-dark: #1A1D2E; /* Matching the Main Heading */
+            --text-main: #333333;
+            --text-subtle: #666666;
+            --bg-light: #FBFBFC;
+            --border-color: #E6E8ED;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+      
+
+        /* Container & Spacing */
+        .container {
+            max-width: 800px;
+            margin: 6rem auto; /* Large top margin like the main heading */
+            padding: 0 2rem;
+        }
+
+        /* Form Card Styling (Card Layout matches the news layout) */
+        .contact-form-card {
+            background: #FFFFFF;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06); /* Subtle shadow for depth */
+            border: 1px solid var(--border-color);
+        }
+
+        /* Header Styling */
+        .page-title {
+            color: var(--primary-dark);
+            font-size: 3rem; /* Same large scale as "Financial News & Insights" */
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .page-subtitle {
+            color: var(--text-subtle);
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+
+        /* Form Specific Styles */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        /* Label and Input Styling */
+        label {
+            display: block;
+            color: var(--primary-dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.6rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px; /* Slightly rounded corners */
+            font-family: inherit;
+            font-size: 1rem;
+            box-sizing: border-box; /* Crucial for padding */
+            background-color: #FFFFFF;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        textarea {
+            resize: vertical; /* Allow resizing only vertically */
+            min-height: 160px;
+        }
+
+        /* Placeholder style matching the News subtitle */
+        ::placeholder {
+            color: #A0A5B1;
+            font-weight: 400;
+        }
+
+        /* Focus States (Blue Accent) */
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 4px rgba(0, 86, 210, 0.1); /* Subtle halo */
+        }
+
+        /* Submit Button (Matching Author Login) */
+        .btn-submit {
+            background-color: var(--primary-blue);
+            color: #FFFFFF;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-submit:hover {
+            background-color: #0047B3; /* Darker blue on hover */
+        }
+
+        .btn-submit:active {
+            transform: translateY(1px); /* Slight click effect */
+        }
+
+    </style>
 </head>
+
 <body>
+     <nav>
+      <div class="menu">
+        <a href="#">Accueil</a>
+        <a href="#">Produits</a>
+        <a href="#">Contact</a>
+      </div>
 
-  <nav>
-    <div class="menu">
-      <a href="#">Accueil</a>
-      <a href="#">Produits</a>
-      <a href="#">Contact</a>
-    </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Rechercher..." />
+        <button type="submit">OK</button>
+      </div>
+    </nav>
 
-    <div class="search-bar">
-      <input type="text" placeholder="Rechercher..." />
-      <button type="submit">OK</button>
+    <div class="container">
+        <h1 class="page-title">Get in Touch</h1>
+        <p class="page-subtitle">Have a question or looking for insights? Reach out to our team of financial analysts.</p>
+
+        <div class="contact-form-card">
+            <form action="submit_contact.php" method="POST">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input type="text" id="first_name" name="first_name" placeholder="Sarah" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" id="last_name" name="last_name" placeholder="Johnson" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Work Email</label>
+                    <input type="email" id="email" name="email" placeholder="sarah.johnson@company.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" placeholder="Market Analysis Inquiry" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Type your inquiry here..." required></textarea>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 0; text-align: right;">
+                    <button type="submit" class="btn-submit">Submit Inquiry</button>
+                </div>
+
+            </form>
+        </div>
     </div>
-  </nav>
 
 </body>
 </html>
