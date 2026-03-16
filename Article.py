@@ -1,4 +1,6 @@
 class Article:
+    # method constructeur 
+    # article1 = Article("", "nike", "nice shoes")
     def __init__(self, article_id=None, title="", content="", author=None):
         self.__article_id = article_id
         self.__title = title
