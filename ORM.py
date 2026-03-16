@@ -1,31 +1,76 @@
+from abc import ABC, abstractmethod
 import mysql.connector
 
-class ORM:
+class ORM(ABC):
     def __init__(self, host, user, password, database):
-        self.host = host
-        self.user = user
-        self.password = password
-        self.database = database
+        self.__host = host
+        self.__user = user
+        self.__password = password
+        self.__database = database
 
-    def connect(self):
+    def _get_connection(self):
         return mysql.connector.connect(
-            host=self.host,
-            user=self.user,
-            password=self.password,
-            database=self.database
+            host=self.__host,
+            user=self.__user,
+            password=self.__password,
+            database=self.__database
         )
 
-    def use_database(self, mydb):
-        mycursor = mydb.cursor()
-        mycursor.execute(f"USE {self.database}")
+    @property
+    @abstractmethod
+    def table_name(self):
+        pass
 
-    def select_all(self, Article):
-        mydb = self.connect()
-        self.use_database(mydb)
-        mycursor = mydb.cursor()
-        mycursor.execute(f"SELECT * FROM {Article}")
-        return mycursor.fetchall()
+    # --- GET (Read all) ---
+    def get_all(self):
+        db = self._get_connection()
+        cursor = db.cursor(dictionary=True)
+        cursor.execute(f"SELECT * FROM {self.table_name}")
+        result = cursor.fetchall()
+        db.close()
+        return result
 
-my_orm = ORM(host="mysql-serhal.alwaysdata.net", user="serhal", password="968-AJK-0101/", database="serhal_projct")
-my_orm.connect()
-my_orm.select_all("Article")
+    # --- GET (Read one by ID) ---
+    def get_one(self, record_id):
+        db = self._get_connection()
+        cursor = db.cursor(dictionary=True)
+        sql = f"SELECT * FROM {self.table_name} WHERE id = %s"
+        cursor.execute(sql, (record_id,))
+        result = cursor.fetchone()
+        db.close()
+        return result
+
+    # --- POST (Create) ---
+    def post(self, data_dict):
+        db = self._get_connection()
+        cursor = db.cursor()
+        columns = ", ".join(data_dict.keys())
+        placeholders = ", ".join(["%s"] * len(data_dict))
+        sql = f"INSERT INTO {self.table_name} ({columns}) VALUES ({placeholders})"
+        cursor.execute(sql, list(data_dict.values()))
+        db.commit()
+        new_id = cursor.lastrowid
+        db.close()
+        return {"id": new_id, "status": "created"}
+
+    # --- PUT (Update) ---
+    def put(self, record_id, data_dict):
+        db = self._get_connection()
+        cursor = db.cursor()
+        settings = ", ".join([f"{key} = %s" for key in data_dict.keys()])
+        sql = f"UPDATE {self.table_name} SET {settings} WHERE id = %s"
+        params = list(data_dict.values()) + [record_id]
+        cursor.execute(sql, params)
+        db.commit()
+        db.close()
+        return {"id": record_id, "status": "updated"}
+
+    # --- DELETE ---
+    def delete(self, record_id):
+        db = self._get_connection()
+        cursor = db.cursor()
+        sql = f"DELETE FROM {self.table_name} WHERE id = %s"
+        cursor.execute(sql, (record_id,))
+        db.commit()
+        db.close()
+        return {"id": record_id, "status": "deleted"}
