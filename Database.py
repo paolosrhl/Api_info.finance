@@ -22,13 +22,13 @@ def get_connection():
         password=password,
         database=database
     )
-    if __name__ == "__main__":
-        try: 
-            conn = get_connection()
-            print("connexion sucess")
-            conn.close()
-        except Exception as e:
-            print("erreur connect:", e)
+if __name__ == "__main__":
+    try: 
+        conn = get_connection()
+        print("connexion sucess")
+        conn.close()
+    except Exception as e:
+        print("erreur connect:", e)
 
 if __name__ == '__main__':
     app.run(debug=True)
